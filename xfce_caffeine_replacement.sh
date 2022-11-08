@@ -4,15 +4,15 @@
 #you will have to create a launcher on the panel and point it to the script and adjust $iconpath after that
 
 #where the icon for the panel is saved
-iconpath="$HOME/.config/xfce4/panel/launcher-19/16665666232.desktop"
+iconpath="$HOME/.config/xfce4/panel/launcher-1/16679117011.desktop"
 
 #which icon to show
 onicon="caffeine-cup-full"
 officon="caffeine-cup-empty"
 
 #message for notification, involves argument and path for icon
-onnotification="-i $HOME/.local/share/icons/Gruvbox-Dark/panel/24/$onicon.svg Präsentationsmodus aktiviert"
-offnotification="-i $HOME/.local/share/icons/Gruvbox-Dark/panel/24/$officon.svg Präsentationsmodus deaktiviert"
+onnotification="-i $HOME/.local/share/icons/Gruvbox-Material-Dark/24x24/panel/$onicon.svg Präsentationsmodus aktiviert"
+offnotification="-i $HOME/.local/share/icons/Gruvbox-Material-Dark/24x24/panel/$officon.svg Präsentationsmodus deaktiviert"
 
 #toggle presentation mode
 xfconf-query -c xfce4-power-manager -p /xfce4-power-manager/presentation-mode -T
