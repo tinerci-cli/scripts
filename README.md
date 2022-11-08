@@ -12,3 +12,6 @@ gives you your screensize
 ### xfce_caffeine_replacement.sh
 having to use a battery symbol on a desktop PC is stupid, two clicks are also stupid, when you can make it one
 designed for xfce
+
+### tabplus/minus
+open a new tab in current window, because terminals use (ctrl+shift+t)

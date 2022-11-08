@@ -1,0 +1,9 @@
+#!/bin/bash
+
+window=$(xdotool getactivewindow getwindowname)
+
+if [[ $window == *"Terminal"* ]]; then
+    xdotool key ctrl+shift+w
+else
+    xdotool key ctrl+w
+fi
