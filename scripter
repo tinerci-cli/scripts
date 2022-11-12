@@ -1,0 +1,20 @@
+#!/bin/sh
+script="$PWD/$1"
+exists="$(/bin/ls -A | /bin/grep "$1")"
+/bin/touch "$script"
+/bin/chmod +x "$script"
+if [ "$exists" = "$1" ]
+then
+    /bin/echo "The file already exists you twat!"
+    exit
+else
+    /bin/echo "#!/bin/sh" >> "$script"
+fi
+
+/bin/read -p "edit file (y/n)? " choice
+case "$choice" in 
+  y|Y ) $EDITOR "$script";;
+  n|N ) exit;;
+  * ) /bin/echo "invalid";;
+esac
+
