@@ -3,7 +3,7 @@
 window=$(xdotool getactivewindow getwindowname)
 
 if [[ $window == *"Terminal"* ]]; then
-    xdotool key ctrl+shift+t
+    /bin/xdotool key ctrl+shift+t
 else
-    xdotool key ctrl+t
+    /bin/xdotool key ctrl+t
 fi

@@ -1,5 +1,10 @@
 #!/bin/sh
 #remove junk files and keep ~ tidy
-rm ~/.dmrc
-rm ~/.gtkrc-2.0
-rm ~/.xsession-error*
+/bin/rm "$HOME"/.gtkrc-2.0
+/bin/rm "$HOME"/.xsession-error*
+while true;
+do
+/bin/rm -rf "$HOME"/.pki;
+/bin/rm "$HOME"/.dmrc;
+/bin/sleep 4;
+done

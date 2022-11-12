@@ -15,15 +15,15 @@ onnotification="-i $HOME/.local/share/icons/Gruvbox-Material-Dark/24x24/panel/$o
 offnotification="-i $HOME/.local/share/icons/Gruvbox-Material-Dark/24x24/panel/$officon.svg Präsentationsmodus deaktiviert"
 
 #toggle presentation mode
-xfconf-query -c xfce4-power-manager -p /xfce4-power-manager/presentation-mode -T
+/bin/xfconf-query -c xfce4-power-manager -p /xfce4-power-manager/presentation-mode -T
 
 #get current mode and adjust the icon and send a notification
-mode=`xfconf-query -c xfce4-power-manager -p /xfce4-power-manager/presentation-mode`
+mode=$(xfconf-query -c xfce4-power-manager -p /xfce4-power-manager/presentation-mode)
 if "$mode" == "true"
 then
-    sed -i "s/$officon/$onicon/g" $iconpath
-    notify-send $onnotification
+    /bin/sed -i "s/$officon/$onicon/g" "$iconpath"
+    /bin/notify-send "$onnotification"
 else
-    sed -i "s/$onicon/$officon/g" $iconpath
-    notify-send $offnotification
+    /bin/sed -i "s/$onicon/$officon/g" "$iconpath"
+    /bin/notify-send "$offnotification"
 fi
