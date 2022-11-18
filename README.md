@@ -17,5 +17,3 @@ designed for xfce
 open a new tab in current window, because terminals use (ctrl+shift+t)
 for use with libinput-gestures
 
-### scripter
-makes script saves you three commands
