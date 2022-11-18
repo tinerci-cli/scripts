@@ -1,8 +1,8 @@
-#!/bin/bash
+#!/bin/sh
 
-window=$(xdotool getactivewindow getwindowname)
+window="$(xdotool getactivewindow getwindowname | awk '{print $1}')"
 
-if [[ $window == *"Terminal"* ]]; then
+if [ "$window" = "Terminal" ]; then
     /bin/xdotool key ctrl+shift+w
 else
     /bin/xdotool key ctrl+w
