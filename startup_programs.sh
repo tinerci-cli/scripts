@@ -1,8 +1,8 @@
 #!/bin/sh
-xdotool key ctrl+F4
 keepassxc &
-sleep 1 && id=$(xdotool search --name "KeePassXC" | tail -n1)
-xdotool windowminimize "$id" && xdotool key ctrl+F1
-
 liferea &
-sleep 1 && xdotool key alt+F4
+sleep 1; #let the windows hit the screen
+kp_id="$(wmctrl -l | grep KeePass | awk '{print $1}')" #window ID of keepass
+lr_id="$(wmctrl -l | grep Liferea | awk '{print $1}')" #window ID of keepass
+wmctrl -i -r $kp_id -t 3 && wmctrl -i -r $kp_id -b toggle,shaded
+wmctrl -i -r $lr_id -b toggle,hidden
