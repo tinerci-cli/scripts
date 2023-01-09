@@ -7,3 +7,5 @@
 /bin/numlockx
 #decrease key repeat dealay to 300ms, increase repeat rate to 50 per second
 /bin/xset r rate 300 50
+#dont need ibus
+ibus exit
