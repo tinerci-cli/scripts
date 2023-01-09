@@ -6,5 +6,6 @@ while true;
 do
 /bin/rm -rf "$HOME"/.pki;
 /bin/rm "$HOME"/.dmrc;
+/bin/rm "$HOME"/.sabnzbd;
 /bin/sleep 4;
 done
