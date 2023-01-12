@@ -1,0 +1,21 @@
+#!/bin/sh
+
+plus() {
+  window="$(xdotool getactivewindow getwindowname | awk '{print $1}')"
+  if [ "$window" = "Terminal" ]; then
+      xdotool key ctrl+shift+t
+  else
+      xdotool key ctrl+t
+  fi
+}
+
+minus() {
+  window="$(xdotool getactivewindow getwindowname | awk '{print $1}')"
+  if [ "$window" = "Terminal" ]; then
+      xdotool key ctrl+shift+w
+  else
+      xdotool key ctrl+w
+  fi
+}
+
+"$@"
