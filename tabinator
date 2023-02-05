@@ -1,7 +1,8 @@
 #!/bin/sh
+#if the output of $window isn't "Terminal" for you, adjust accordingly
+window="$(xdotool getactivewindow getwindowname | awk '{print $1}')"
 
 plus() {
-  window="$(xdotool getactivewindow getwindowname | awk '{print $1}')"
   if [ "$window" = "Terminal" ]; then
       xdotool key ctrl+shift+t
   else
@@ -10,7 +11,6 @@ plus() {
 }
 
 minus() {
-  window="$(xdotool getactivewindow getwindowname | awk '{print $1}')"
   if [ "$window" = "Terminal" ]; then
       xdotool key ctrl+shift+w
   else
