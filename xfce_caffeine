@@ -1,0 +1,22 @@
+#!/bin/sh
+# requires https://github.com/jonhoo/mktrayicon
+
+# set up
+kill "$(pidof mktrayicon)"
+mkfifo /tmp/$$.icon
+mktrayicon /tmp/$$.icon &
+
+# click
+echo "c xfconf-query -c xfce4-power-manager -p /xfce4-power-manager/presentation-mode -T && $0" > /tmp/$$.icon
+
+# icon
+mode=$(xfconf-query -c xfce4-power-manager -p /xfce4-power-manager/presentation-mode)
+
+if "$mode" == "true"
+then
+  icon=caffeine-cup-full
+else
+  icon=caffeine-cup-empty
+fi
+
+echo "i $icon" > /tmp/$$.icon
