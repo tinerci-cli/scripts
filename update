@@ -1,0 +1,11 @@
+#!/bin/sh
+
+echo "Updating Flatpaks..."
+flatpak update
+echo "Updating System..."
+sudo apt update;
+sudo apt upgrade;
+echo "Updating neovim-plugins..."
+nvim --headless -c 'autocmd User PackerComplete quitall' -c 'PackerSync'
+echo "Updating tmux-plugins..."
+~/.config/tmux/plugins/tpm/bin/update_plugins all
