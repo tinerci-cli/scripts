@@ -1,7 +1,7 @@
 #!/bin/sh
 keepassxc &
 liferea &
-sleep 3; #let the windows hit the screen
+sleep 5; #let the windows hit the screen
 lr_id="$(wmctrl -l | grep Liferea | awk '{print $1}')" #window ID of keepass
 wmctrl -i -r $lr_id -b toggle,hidden
 kp_id="$(wmctrl -l | grep KeePass | awk '{print $1}')" #window ID of keepass
