@@ -1,0 +1,30 @@
+#!/bin/bash
+# must be member in group "dip"
+#current brightness
+lvl="$(ddcutil getvcp --display 1 10 | awk '{print $9}' | tr -d ',')"
+
+minus ()
+{
+  for ((i = 1; i < 4; i++)); do
+    ddcutil setvcp --display "$i" 10 "$(echo "$lvl" - 10 | bc -l)"
+  done
+    echo "$lvl" - 10 | bc -l
+}
+
+plus ()
+{
+  for ((i = 1; i < 4; i++)); do
+    ddcutil setvcp --display "$i" 10 "$(echo "$lvl" + 10 | bc -l)"
+  done
+    echo "$lvl" + 10 | bc -l
+}
+
+num ()
+{
+  for ((i = 1; i < 4; i++)); do
+    ddcutil setvcp --display "$i" 10 "$1"
+  done
+}
+
+
+"$@"
