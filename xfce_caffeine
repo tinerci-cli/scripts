@@ -12,7 +12,7 @@ echo "c xfconf-query -c xfce4-power-manager -p /xfce4-power-manager/presentation
 # icon
 mode=$(xfconf-query -c xfce4-power-manager -p /xfce4-power-manager/presentation-mode)
 
-if "$mode" == "true"
+if "$mode" '==' "true"
 then
   icon=caffeine-cup-full
 else

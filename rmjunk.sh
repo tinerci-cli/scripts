@@ -6,6 +6,7 @@
 while true;
 do
 /bin/rm -rf "$HOME"/.pki;
-/bin/rm -rf "$HOME"/.java;
+# /bin/rm -rf "$HOME"/.java;
+/bin/rm -rf "$HOME"/.sudo_as_admin_successful;
 /bin/sleep 4;
 done
