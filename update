@@ -2,10 +2,13 @@
 
 echo "Updating Flatpaks..."
 flatpak update
-echo "Updating System..."
+printf "\n"
+echo "Updating apt..."
 sudo apt update;
 sudo apt upgrade;
+printf "\n"
 echo "Updating neovim-plugins..."
 nvim --headless -c 'autocmd User PackerComplete quitall' -c 'PackerSync'
+printf "\n"
 echo "Updating tmux-plugins..."
 ~/.config/tmux/plugins/tpm/bin/update_plugins all

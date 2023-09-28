@@ -18,6 +18,9 @@ change xset
 ### move_next_mon.sh
 move window to next monitor, keeping size (xfce didnt have a keycombo for this) (stolen)
 
+### pipewireshit
+weird pipewire bug, where pipewire will shit itself when displays are turned of
+
 ### redshit
 redshift doesn't work normally, so startup script
 
@@ -36,11 +39,17 @@ starts keepass moves it to the 5th workplace, minimizes it
 ### tabinator
 for touchpad gestures, open/close tab, because terminals have other keybindings
 
+### tmuxinator
+create new tmux session or choose a existing one from fzf
+
 ### unix
 eyecandy (stolen)
 
 ### update
 update system
+
+### usertmp.sh
+create tmp folder in $HOME/.local/tmp/
 
 ### xfce_caffeine
 having to use a battery symbol on a desktop PC is stupid, two clicks are also stupid, when you can make it one
