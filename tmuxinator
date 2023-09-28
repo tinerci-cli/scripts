@@ -7,7 +7,11 @@ sessions="$(echo "NEW SESSION\n$(tmux list-sessions)" | fzf | awk -F: '{print $1
 if [ "$sessions" = "NEW SESSION" ]; then
   echo "New Session Name:"
   read -r newsession
-  tmux new -s "$newsession"
+  if [ -z "$newsession" ]; then
+    tmux
+  else
+    tmux new -s "$newsession"
+  fi
 else
   tmux attach -d -t "$sessions"
 fi
