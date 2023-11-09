@@ -1,21 +1,48 @@
-#!/bin/sh
-#if the output of $window isn't "Terminal" for you, adjust accordingly
+#!/bin/bash
+# if not usting tmux
+# replace string matching with other shell multiplexer or a terminal emulator
+# also change command
+
 window="$(xdotool getactivewindow getwindowname | awk '{print $1}')"
 
 plus() {
-  if [ "$window" = "Terminal" ]; then
-      xdotool key ctrl+shift+t
-  else
-      xdotool key ctrl+t
-  fi
+	if [[ "$window" = "tmux"* ]]; then
+		tmux new-window
+	else
+		xdotool key ctrl+t
+	fi
 }
 
 minus() {
-  if [ "$window" = "Terminal" ]; then
-      xdotool key ctrl+shift+w
-  else
-      xdotool key ctrl+w
-  fi
+	if [[ "$window" = "tmux"* ]]; then
+		tmux kill-window
+	else
+		xdotool key ctrl+w
+	fi
+}
+
+next() {
+	if [[ "$window" = "tmux"* ]]; then
+		tmux next-window
+	else
+		xdotool key ctrl+Page_Down
+	fi
+}
+
+prev() {
+	if [[ "$window" = "tmux"* ]]; then
+		tmux previous-window
+	else
+		xdotool key ctrl+Page_Up
+	fi
+}
+
+mvnext() {
+	if [[ "$window" = "tmux"* ]]; then
+		tmux next-window
+	else
+		xdotool key ctrl+shift+Page_Up
+	fi
 }
 
 "$@"

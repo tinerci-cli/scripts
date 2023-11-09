@@ -8,7 +8,7 @@ session="$(echo "$sessions" | fzy)"
 if [[ "$sessions" = *"$session"* ]]; then
 	tmux attach -d -t "$session"
 else
-	dir="$(printf "%s" "$(find ~ -type d)" | fzy)"
+	dir="$(printf ".\n%s" "$(find ~ -type d)" | fzy)"
 	tmux new -s "$session" -c "$dir"
 
 fi
