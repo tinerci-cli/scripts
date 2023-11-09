@@ -8,3 +8,7 @@ xset r rate 300 50
 #dont need ibus
 #make a single press on super open menu, cause xfce is a little autistic
 xcape -e 'Super_L=Alt_L|F1'
+# synclient shit
+synclient TapButton3=0 PalmDetect=1
+# shell is safer than gui settings :sunglasses_emoji:
+setxkbmap us altgr-intl
