@@ -1,17 +1,14 @@
-#!/bin/sh
+#!/bin/bash
 
 # a fzf list of all active tmux sessions and option to create new one
 
-sessions="$(echo "NEW SESSION\n$(tmux list-sessions)" | fzf | awk -F: '{print $1}')"
+sessions="$(tmux ls | awk -F: '{print $1}')"
+session="$(echo "$sessions" | fzy)"
 
-if [ "$sessions" = "NEW SESSION" ]; then
-  echo "New Session Name:"
-  read -r newsession
-  if [ -z "$newsession" ]; then
-    tmux
-  else
-    tmux new -s "$newsession"
-  fi
+if [[ "$sessions" = *"$session"* ]]; then
+	tmux attach -d -t "$session"
 else
-  tmux attach -d -t "$sessions"
+	dir="$(printf "%s" "$(find . -type d)" | fzy)"
+	tmux new -s "$session" -c "$dir"
+
 fi
