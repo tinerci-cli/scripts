@@ -1,11 +1,11 @@
 #!/bin/sh
 
-echo "Updating Flatpaks..."
-flatpak update
-printf "\n"
-echo "Updating apt..."
+echo "Updating system..."
 sudo apt update;
 sudo apt upgrade;
+printf "\n"
+echo "Updating Flatpaks..."
+flatpak update
 printf "\n"
 echo "Updating neovim-plugins..."
 nvim --headless -c 'autocmd User PackerComplete quitall' -c 'PackerSync'
