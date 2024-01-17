@@ -8,12 +8,12 @@ function main ()
 
 function screenmirror ()
 {
-	adb connect 192.168.178.12:5555 && scrcpy || scrcpy
+	sh -c "adb connect 192.168.178.12:5555 && scrcpy || scrcpy"
 }
 
 function adb ()
 {
-	adb connect 192.168.178.12:5555 && sh -c "adb shell" || sh -c "adb shell"
+	sh -c "adb connect 192.168.178.12:5555 && adb shell || adb shell"
 }
 
 function ssh ()
