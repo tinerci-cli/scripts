@@ -1,5 +1,9 @@
 #!/bin/bash
 
+phoneip="192.168.178.12"
+adbport="5555"
+sshport="8022"
+
 function main ()
 {
 	exec="$(printf "screenmirror\nadb\nssh\nsftp\nsendfile\nring" | fzy)"
@@ -8,23 +12,23 @@ function main ()
 
 function screenmirror ()
 {
-	sh -c "adb connect 192.168.178.12:5555 && scrcpy || scrcpy"
+	sh -c "adb connect '$phoneip':'$adbport' && scrcpy || scrcpy"
 }
 
 function adb ()
 {
-	sh -c "adb connect 192.168.178.12:5555 && adb shell || adb shell"
+	sh -c "adb connect '$phoneip':'$adbport' && adb shell || adb shell"
 }
 
 function ssh ()
 {
-	sh -c "ssh -p 8022 192.168.178.12"
+	sh -c "ssh -p '$sshport' '$phoneip'"
 
 }
 
 function sftp ()
 {
-	sh -c "sftp -P 8022 192.168.178.12"
+	sh -c "sftp -P '$sshport' '$phoneip'"
 
 }
 
