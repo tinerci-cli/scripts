@@ -1,0 +1,42 @@
+#!/bin/bash
+
+function main ()
+{
+	exec="$(printf "screenmirror\nadb\nssh\nsftp\nsendfile\nring" | fzy)"
+	"$exec"
+}
+
+function screenmirror ()
+{
+	scrcpy
+}
+
+function adb ()
+{
+	sh -c "adb connect 192.168.178.12:5555"
+	sh -c "adb shell"
+}
+
+function ssh ()
+{
+	sh -c "ssh -p 8022 192.168.178.12"
+
+}
+
+function sftp ()
+{
+	sh -c "sftp -P 8022 192.168.178.12"
+
+}
+
+function sendfile ()
+{
+	kdeconnect-cli -n "Pixel 4a" --share "$(zenity --file-selection)"
+}
+
+function ring ()
+{
+	kdeconnect-cli -n "Pixel 4a" --ring
+}
+
+main
