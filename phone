@@ -31,7 +31,16 @@ function sftp ()
 
 function sendfile ()
 {
-	kdeconnect-cli -n "Pixel 4a" --share "$(zenity --file-selection)"
+	method=$(printf "zenity\nfzf" | fzy)
+	case "$method" in
+		zenity) file="$(zenity --file-selection)"
+			;;
+		fzf) FZF_DEFAULT_COMMAND='fd -H . "$HOME"' file="$(fzf-tmux)"
+			;;
+		*) exit
+			;;
+	esac
+	kdeconnect-cli -n "Pixel 4a" --share "$file"
 }
 
 function ring ()
