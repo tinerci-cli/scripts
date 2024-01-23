@@ -8,7 +8,7 @@ echo "Updating Flatpaks..."
 flatpak update
 printf "\n"
 echo "Updating neovim-plugins..."
-nvim --headless -c 'autocmd User PackerComplete quitall' -c 'PackerSync'
+nvim --headless -c 'NvChadUpdate'
 printf "\n"
 echo "Updating tmux-plugins..."
 ~/.config/tmux/plugins/tpm/bin/update_plugins all
