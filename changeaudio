@@ -1,6 +1,6 @@
 #!/bin/sh
 sink="$(pactl info | grep Ziel)"
-if [ "$sink" = "Standard-Ziel: alsa_output.pci-0000_06_00.1.hdmi-stereo-extra4" ]
+if [ "$sink" = "Standard-Ziel: alsa_output.pci-0000_05_00.1.hdmi-stereo-extra4" ]
 then
   echo "$sink"
   pactl set-default-sink alsa_output.pci-0000_0c_00.4.analog-stereo
@@ -8,7 +8,7 @@ then
   aplay ~/.local/share/confirm_sound.wav
 else
   echo "$sink"
-  pactl set-default-sink alsa_output.pci-0000_06_00.1.hdmi-stereo-extra4
+  pactl set-default-sink alsa_output.pci-0000_05_00.1.hdmi-stereo-extra4
   notify-send "Audioausgabe auf Lautsprecher gewechselt"
   aplay ~/.local/share/confirm_sound.wav
 fi
