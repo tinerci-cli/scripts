@@ -1,40 +1,23 @@
 #!/bin/bash
-while [[ true ]]; do
+text(){
+	names=("Fajr" "Sonnenaufgang" "Dhuhr" "Asr" "Maghrib" "Isha")
+	link="https://www.muwaqqit.com/index?lt=50.0782184&ln=8.2397608&d=2024-5-20&tztype=auto&tz=Europe%2FBerlin&vc=5.65&diptype=apparent&eo=121&eh=121&ehtype=observer&t=15.0&p=1010.0&k=0.155&zt=1.0&fa=-12.0&era=-16.0&ea=-12.0&ia=4.5&isn=-10.0&fea=1.0&rsa=1.0&isna=1.0&z=1&q=&add=Luisenpl.+4%2C+65185+Wiesbaden%2C+Germany"
+	times=($(curl "$link" -s |
+		grep -P "\d\d:\d\d:\d\d" |
+		sed -n '2p;4p;11p;12p;15p;21p' |
+		awk -F'[^0-9:]+' '{ for(i=1;i<=NF;i++) if ($i ~ /^[0-9]{2}:[0-9]{2}:[0-9]{2}$/) print $i }'))
 
-  pathhtml="$HOME/.local/share/scripts_assets/namaz.html"
-  pathsmpl="$HOME/.local/share/scripts_assets/simple_namaz.txt"
-  url="https://sunrisesunset.de/sonne/deutschland/wiesbaden/"
-  asrurl="https://azaneum.de/germany/wiesbaden/?juristic=Shafii"
-  usra="Mozilla/5.0 (Windows NT 10.0; rv:109.0) Gecko/20100101 Firefox/115.0"
-  heute="$(date -I)"
-  heutf="$(head -n1 "$pathsmpl")"
+	for ((i = 0; i < 6; i++)); do
+		echo ${times[$i]} - ${names[$i]}
+	done
+}
 
-  if [[ "$heute" != "$heutf" ]]; then
-    sed -i "1s/.*/$heutf/" "$pathsmpl"
-    curl -s -A "$usra" "$url" > "$pathhtml"
-
-    fajr="$(grep ochtend_naut_scherm -m 1 "$pathhtml" | cut -d ">" -f 2 | cut -d " " -f 1)"
-    auf="$(grep "id=\"sunrise\"" "$pathhtml" | cut -d ">" -f 4 | cut -d "<" -f 1)"
-    dhuhr="$(grep "zen dneszenit" "$pathhtml" | cut -d ">" -f 2 | cut -d "<" -f 1)"
-    asr="$(curl -s "$asrurl" | grep Asr -m 1 | cut -d ">" -f 7 | cut -d "<" -f 1)"
-    maghrib="$(grep "id=\"sunset\"" "$pathhtml" | cut -d ">" -f 4 | cut -d "<" -f 1)"
-    isha="$(grep avond_astr_scherm -m 1 "$pathhtml" | cut -d ">" -f 2 | cut -d " " -f 1)"
-
-    sed -i "1s/.*/$heute/" "$pathsmpl"
-    sed -i "2s/.*/$fajr - Fajr/" "$pathsmpl"
-    sed -i "3s/.*/$auf - Sonnenaufgang/" "$pathsmpl"
-    sed -i "4s/.*/$dhuhr - Dhuhr/" "$pathsmpl"
-    sed -i "5s/.*/$asr - Asr/" "$pathsmpl"
-    sed -i "6s/.*/$maghrib - Maghrib/" "$pathsmpl"
-    sed -i "7s/.*/$isha - Isha/" "$pathsmpl"
-    kill $(pidof yad)
-    yad --notification --image="indicator-lunar" --command="yad --text='$(cat $HOME/.local/share/scripts_assets/simple_namaz.txt)' --title='Wiesbaden - Gebetszeiten' "
-    sleep 60
-  else
-    kill $(pidof yad)
-    yad --notification --image="indicator-lunar" --command="yad --text='$(cat $HOME/.local/share/scripts_assets/simple_namaz.txt)' --title='Wiesbaden - Gebetszeiten' "
-    sleep 60
-
-  fi
-
+restart(){
+	killall namaz.sh
+	killall yad
+}
+while [ "$(hostname -I)" = "" ]; do
+  echo -e "\e[1A\e[KNo network: $(date)"
+  sleep 1
 done
+yad --notification --image="indicator-lunar" --command="yad --text='$(text)' --title='Wiesbaden - Gebetszeiten' "
