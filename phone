@@ -43,12 +43,12 @@ function sendfile ()
 		*) exit
 			;;
 	esac
-	kdeconnect-cli -n "Pixel 4a" --share "$file"
+	kdeconnect-cli -n "moto g32" --share "$file"
 }
 
 function ring ()
 {
-	kdeconnect-cli -n "Pixel 4a" --ring
+	kdeconnect-cli -n "moto g32" --ring
 }
 
 main
