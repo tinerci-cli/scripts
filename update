@@ -4,11 +4,8 @@ echo "Updating system..."
 sudo apt update;
 sudo apt upgrade;
 printf "\n"
-echo "Updating Flatpaks..."
-flatpak update
-printf "\n"
 echo "Updating neovim-plugins..."
-nvim --headless '+NvChadUpdate' +qa
+nvim --headless "+Lazy! sync" +qa
 printf "\n"
 echo "Updating tmux-plugins..."
 ~/.config/tmux/plugins/tpm/bin/update_plugins all
