@@ -6,7 +6,7 @@ sshport="8022"
 
 function main ()
 {
-	exec="$(printf "screenmirror\nadb\nssh\nsftp\nsendfile\nring\ncpsync" | fzy)"
+	exec="$(printf "screenmirror\nadb\nssh\nsftp\nsendfile\nring\ncpsync\nfrontcam\nbackcam" | fzy)"
 	"$exec"
 }
 
@@ -56,6 +56,16 @@ function cpsync ()
 	sh -c "adb shell 'pm grant org.kde.kdeconnect_tp android.permission.READ_LOGS;
 	appops set org.kde.kdeconnect_tp SYSTEM_ALERT_WINDOW allow;
 	am force-stop org.kde.kdeconnect_tp;'"
+}
+
+function frontcam ()
+{
+	scrcpy --video-source=camera --camera-facing=front --no-audio
+}
+
+function backcam ()
+{
+	scrcpy --video-source=camera --camera-facing=back --no-audio
 }
 
 main
