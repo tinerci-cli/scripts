@@ -6,7 +6,7 @@ sshport="8022"
 
 function main ()
 {
-	exec="$(printf "screenmirror\nadb\nssh\nsftp\nsendfile\nring" | fzy)"
+	exec="$(printf "screenmirror\nadb\nssh\nsftp\nsendfile\nring\ncpsync" | fzy)"
 	"$exec"
 }
 
@@ -29,7 +29,6 @@ function ssh ()
 function sftp ()
 {
 	sh -c "sftp -P '$sshport' '$phoneip'"
-
 }
 
 function sendfile ()
@@ -49,6 +48,14 @@ function sendfile ()
 function ring ()
 {
 	kdeconnect-cli -n "moto g32" --ring
+}
+
+function cpsync ()
+{
+	sh -c "adb connect '$phoneip':'$adbport'"
+	sh -c "adb shell 'pm grant org.kde.kdeconnect_tp android.permission.READ_LOGS;
+	appops set org.kde.kdeconnect_tp SYSTEM_ALERT_WINDOW allow;
+	am force-stop org.kde.kdeconnect_tp;'"
 }
 
 main
