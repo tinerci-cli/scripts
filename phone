@@ -3,6 +3,7 @@
 phoneip="192.168.178.12"
 adbport="5555"
 sshport="8022"
+name="moto g32"
 
 function main ()
 {
@@ -12,12 +13,12 @@ function main ()
 
 function screenmirror ()
 {
-	sh -c "adb connect '$phoneip':'$adbport' && scrcpy || scrcpy"
+	sh -c "adb connect '$phoneip':'$adbport'; scrcpy"
 }
 
 function adb ()
 {
-	sh -c "adb connect '$phoneip':'$adbport' && adb shell || adb shell"
+	sh -c "adb connect '$phoneip':'$adbport'; adb shell"
 }
 
 function ssh ()
@@ -42,12 +43,12 @@ function sendfile ()
 		*) exit
 			;;
 	esac
-	kdeconnect-cli -n "moto g32" --share "$file"
+	kdeconnect-cli -n "$name" --share "$file"
 }
 
 function ring ()
 {
-	kdeconnect-cli -n "moto g32" --ring
+	kdeconnect-cli -n "$name" --ring
 }
 
 function cpsync ()
@@ -60,12 +61,12 @@ function cpsync ()
 
 function frontcam ()
 {
-	scrcpy --video-source=camera --camera-facing=front --no-audio
+	sh -c "adb connect '$phoneip':'$adbport'; scrcpy --video-source=camera --camera-facing=front --no-audio"
 }
 
 function backcam ()
 {
-	scrcpy --video-source=camera --camera-facing=back --no-audio
+	sh -c "adb connect '$phoneip':'$adbport'; scrcpy --video-source=camera --camera-facing=back --no-audio"
 }
 
 main
