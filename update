@@ -1,8 +1,7 @@
 #!/bin/sh
 
 echo "Updating system..."
-sudo apt update;
-sudo apt upgrade;
+sudo nala upgrade --update;
 printf "\n"
 echo "Updating neovim-plugins..."
 nvim --headless "+Lazy! sync" +qa
