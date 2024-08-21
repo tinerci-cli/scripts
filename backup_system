@@ -1,0 +1,23 @@
+#!/bin/sh
+
+DATE="$(date -I)"
+MVDIR="/tmp/backup/backup_sysdata_$(hostname)_$DATE"
+TARF="/tmp/backup/backup_sysdata_$(hostname)_$DATE.tar.gz"
+DIRS="/etc /usr/local/share/themes /usr/local/share/icons /usr/local/share/applications /opt"
+
+echo "=================================="
+mkdir -p "$MVDIR"
+echo "=================================="
+echo
+echo "MOVING FOLDERS"
+for DIR in $DIRS; do
+	rsync -rvPh "$DIR" "$MVDIR"
+done
+echo
+echo "=================================="
+echo "CREATING ARCHIVE"
+tar cf - "$MVDIR" -P | pv -s $(du -sb "$MVDIR" | awk '{print $1}') | gzip > $TARF
+rm -rf "$MVDIR"
+echo
+echo "=================================="
+echo "BACKUP $TARF CREATED SUCCESFULLY"
