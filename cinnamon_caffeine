@@ -1,0 +1,12 @@
+#!/bin/bash
+
+idle_t="$(gsettings get org.cinnamon.desktop.session idle-delay | awk '{print $NF}')"
+echo $idle_t
+
+if (( "$idle_t" == 0 )); then
+	gsettings set org.cinnamon.desktop.session idle-delay 300
+else
+	gsettings set org.cinnamon.desktop.session idle-delay 0
+fi
+
+gsettings get org.cinnamon.desktop.session idle-delay
