@@ -1,0 +1,44 @@
+#!/bin/bash
+
+usrappimagepath="$HOME/.local/AppImage"
+usrexpath="$HOME/.local/bin"
+name="$(basename $1)"
+tmpfile="/tmp/$(shuf --random-source=/dev/random -i 100000-999999 -n1).desktop"
+usrdesktop="$HOME/.local/share/applications"
+dffinal="$usrdesktop/$name.desktop"
+touch $tmpfile
+
+crdesktopfile() {
+	read -p "Enter Name: " dfname
+	read -p "Enter GenericName: " dfgen
+	echo "List of Categories: AudioVideo;Audio;Video;Development;Education;Game;Graphics;Network;Office;Science;Settings;System;Utility"
+	read -p "Enter Categories: " dfcat
+	echo "to lazy to implement auto execpath, pls enter yourself"
+	icons=$(find /usr/share/icons /home/$USER/.icons /usr/local/share/icons \
+	-type f \( -name "*.png" -o -name "*.svg" \) | awk -F/ '{print $NF}' | sort -u)
+	icon_list=$(echo "$icons" | awk '{print $0 "!" $0}')
+	chosen_icon=$(echo "$icon_list" | yad --list --title="Choose an Icon" \
+	--width=600 --height=400 \
+    	--search-column=2 \
+    	--column="Icon":IMG --column="Name" \
+    	--separator="" --print-column=2)
+  dficon=$(echo $chosen_icon | cut -d '.' -f 1)
+	cat >> $tmpfile << EOF
+	[Desktop Entry]
+	Name=$dfname
+	GenericName=$dfgen
+	Exec=$usrexpath/$name
+	Icon=$dficon
+	Terminal=false
+	Type=Application
+	Categories=$dfcat
+	StartupNotify=false
+
+EOF
+}
+
+chmod +x $1
+cp "$1" "$usrappimagepath"
+ln -s "$usrappimagepath"/"$name" "$usrexpath"
+crdesktopfile
+mv "$tmpfile" "$dffinal"
