@@ -16,8 +16,8 @@ restart(){
 	killall namaz.sh
 	killall yad
 }
-while [ "$(hostname -I)" = "" ]; do
-  echo -e "\e[1A\e[KNo network: $(date)"
-  sleep 1
-done
+# while [ "$(hostname -I)" = "" ]; do
+#   echo -e "\e[1A\e[KNo network: $(date)"
+#   sleep 1
+# done
 yad --notification --image="indicator-lunar" --command="yad --text='$(text)' --title='Wiesbaden - Gebetszeiten' --no-buttons --mouse --width 300 --height 200 --undecorated --close-on-unfocus"
